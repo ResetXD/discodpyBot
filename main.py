@@ -105,18 +105,8 @@ async def on_member_join(g):
     try:
         channelcol = await guildJoinCollection.find_one({'_id': str(g.guild.id)})
         channel = client.get_channel(int(channelcol["channelID"]))
-        one = g.name
-        one = one.split(" ")
-        abc = ""
-        for x in one:
-            abc+= x + "%20"
-        one = abc
-        two = str(channelcol["message"])
-        two = two.split(" ")
-        a = ""
-        for x in two:
-            a += x + "%20"
-        two = a
+        one = g.name.replace(' ','%20')
+        two = str(channelcol["message"]).replace(' ','%20')
         three = "welcome%20to%20the%20server"
         avatar = g.avatar_url_as(format="jpg")
         base = f"https://api.popcatdev.repl.co/welcomecard?background=https://media.discordapp.net/attachments/827137926491144215/861188219411103744/aaaaa.png&text1={one}&text2={two}&text3={three}&avatar={avatar}"
